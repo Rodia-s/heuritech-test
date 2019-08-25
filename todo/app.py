@@ -29,19 +29,8 @@ tododb = db['dailystats']
 def todo():
     _items = db.tododb.find()
     items = [item for item in _items]
-    return render_template('todo.html', items=items )
+    return render_template('todo.html')
 
-
-#route to add a document into mongodb 
-@app.route('/new', methods=['POST'])
-def new():
-    item_doc={
-        'name' : request.form['name'],
-        'description' : request.form['description']
-    }
-    db.tododb.insert_one(item_doc
-                         )
-    return redirect(url_for('todo'))
 
 #route to upload external_sample.json
 @app.route('/load_json', methods=['GET'])
@@ -59,15 +48,6 @@ def show_json():
     _data = db.jsondata.find()
     datas = [data for data in _data]
     return render_template('display_json.html', datas=datas )
-
-# route to compute stats on the collection jsondata and insert it into dailystats collection
-@app.route('/stats', methods=['GET'])
-def get_stats():
-    #stats ={}
-    db.command("dbstats") # prints database stats for "test_db"
-    stats=db.command("collstats", "jsondata") 
-    #db.dailystats.insert_one(stats)
-    return render_template('display_stats.html', stats=stats )
 
 
 # route to compute stats on the collection jsondata and insert it into dailystats collection
@@ -166,12 +146,23 @@ def empty_daily_stats():
     db.daily_stat_df.remove()
     return render_template('success_empty.html')
 
-# route to compute stats on the collection jsondata and insert it into dailystats collection
+# route to compute stats on the collection jsondata and insert it into dailystats collection 2018-01-31 00:00:00
 @app.route('/get_daily_stats',methods=['GET','POST'])
 def get_daily_stats():
-    _data = db.daily_stat_df.find()
-    datas = [data for data in _data]
-    return render_template('display_json.html', datas=datas )
+    if request.method == 'POST': #this block is only entered when the form is submitted
+        data_send = pd.Timestamp(request.form['date'])
+        _data = db.daily_stat_df.find({'date': str(data_send)})
+        datas = [data for data in _data]
+        return render_template('display_json.html', datas=datas)
+    # elif request.method == 'GET':
+    #     _data = db.daily_stat_df.find({'date': '2018-01-31 00:00:00'})
+    #     datas = [data for data in _data]
+    #     return render_template('display_json.html', datas=datas )
+    return '''<form method="POST">
+                Date: <input type="text" name="date"><br>
+                <input type="submit" value="Submit"><br>
+            </form>'''
+
 
 
 
