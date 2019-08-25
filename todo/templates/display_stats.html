@@ -1,0 +1,15 @@
+<!doctype html>
+
+<title>{% block title %}{% endblock %}</title>
+<ul>
+{% for json in json_data %}
+  <li><a href="#">{{ json }}</a></li>
+{% endfor %}
+</ul>
+<!-- <h1>
+    {% for key,value in json_data.items %}{{ value }}{% endfor %}
+</h1>  -->
+<!-- {% for data in  stats %}
+    <h1> {{ data }} </h1>
+    <p> {{ stats }} </p>
+{% endfor %} -->
