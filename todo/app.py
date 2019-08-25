@@ -118,10 +118,10 @@ def compute_stats():
         i = pd.Timestamp(i)
         #iterate on every unique entity 
         for j in entity_array_unique :
-
             df_by_query = df[df['date'] == i]
             df_by_query = df_by_query[df_by_query['entity'] == j]
             print(df_by_query.head())
+
             #extract json followers name author
             df_by_query['followers'] = pd.io.json.json_normalize(df_by_query['author'])
             #sort by date and tags
@@ -160,9 +160,14 @@ def compute_stats():
 
     return render_template('display_stats.html', json_data=json_data )
 
+#empty_daily_stats
+@app.route('/empty_daily_stats',methods=['GET','POST'])
+def empty_daily_stats():
+    db.daily_stat_df.remove()
+    return render_template('success_empty.html')
 
 # route to compute stats on the collection jsondata and insert it into dailystats collection
-@app.route('/get_daily_stats',methods=['POST'])
+@app.route('/get_daily_stats',methods=['GET','POST'])
 def get_daily_stats():
     _data = db.daily_stat_df.find()
     datas = [data for data in _data]
