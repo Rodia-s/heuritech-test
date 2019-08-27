@@ -2,17 +2,15 @@ Requirement :
 Docker
 Docker-compose
 
-todo : 
+
+enter in terminal  the following command to retrieve the project : 
+
 git clone https://github.com/Rodia-s/heuritech-test.git
-
-
-enter in terminal :
+___________________________________________________________
 cd ./heuritech-test/todo
-
-build image : 
+___________________________________________________________
 docker-compose build
-
-build project :
+___________________________________________________________
 docker-compose up 
 
 then test URL :
