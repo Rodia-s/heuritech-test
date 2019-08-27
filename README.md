@@ -5,8 +5,14 @@ Docker-compose
 todo : 
 git clone https://github.com/Rodia-s/heuritech-test.git
 
+
+enter in terminal :
 cd ./heuritech-test/todo
+
+build image : 
 docker-compose build
+
+build project :
 docker-compose up 
 
 then test URL :

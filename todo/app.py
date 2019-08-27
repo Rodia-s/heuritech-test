@@ -164,30 +164,5 @@ def get_daily_stats():
             </form>'''
 
 
-
-
-
-
-# @app.route('/compute_daily_stats',methods=['GET'])
-# def compute_stats():
-
-#     _data = db.jsondata.find()
-#     datas = [data for data in _data]
-#     df = pd.DataFrame.from_dict(datas, orient='columns')
-#     #df['date'] =  pd.to_datetime(df['ts'], unit = 's')
-    
-#     #x = df['date'].as_matrix()
-#     #x = np.asarray(x, dtype='datetime64[D]')
-
-#     #df['date'] =  x
-#     #df.index = df['date'] 
-#     daily_stat_df = df.resample('D',on = 'date').sum()
-
-#     #x = np.unique(x)
-#     #stats =  x.tolist()
-#     stats = daily_stat_df.values.tolist()
-#     return render_template('display_stats.html', stats=stats )
-
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
