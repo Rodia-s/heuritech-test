@@ -5,7 +5,7 @@ Docker-compose
 
 enter in terminal  the following command to retrieve the project : 
 
-git clone https://github.com/Rodia-s/heuritech-test.git
+git clone 
 ___________________________________________________________
 cd ./heuritech-test/todo
 ___________________________________________________________
